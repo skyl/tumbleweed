@@ -1,0 +1,40 @@
+<html>
+<head>
+    <title>{% block head_title %}{{_("RealTime.SkYl.OrG")}}{% end %}</title>
+    {% block head_base %}
+	{% block extra_head %}
+	{% end %}
+    {% end %}
+</head>
+<body>
+<!-- locale={{ locale }} -->
+    <div id="body">
+	{% block account %}
+	    {% include 'auth/authenticate_create.html' %}
+	{% end %}
+	{% block body %}
+	    Hello World!!!
+	{% end %}
+    </div>
+    <script type="text/javascript" src="{{ static_url("js/jquery.js") }}"></script>
+    <script type="text/javascript" src="{{ static_url("js/xsrf.js") }}"></script>
+    {% if any_auth and not name %}
+    <script type="text/javascript" src="{{ static_url("js/jquery.validate.js") }}"></script>
+    <script>
+    $( function(){
+	$('input#key').focus();
+        $('form#key-form').validate({
+	    rules: {key: {required: true, remote: '/check-username', maxlength: 255}},
+	    messages: {key: {
+		required: 'please enter your desired username key',
+		remote: 'sorry, already taken, perhaps you authenticated with another service?'}}
+	});
+    });
+    </script>
+    {% end %}
+    {% block extra_body_base %}
+	{% block extra_body %}{% end %}
+    {% end %}
+</body>
+</html>
+

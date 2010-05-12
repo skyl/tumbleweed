@@ -1,0 +1,39 @@
+<div id="account">
+{% if name %}
+    {{ name }},
+    <a href="/logout">logout</a>
+{% end %}
+{% if any_auth and not name %}
+    <div id="username-jive">Anything but spaces</div>
+    <form id="key-form" method="post" action="/create?next={{request.path}}">
+    {{ xsrf_form_html() }}
+        <div>
+    	Desired name key:
+    	<input id="key" type="text" name="key" />
+    	<input type="submit" value="Submit" />
+        </div>
+    </form>
+{% end %}
+{% if not fully_authed %}
+    <div id="login-links">
+	{% if not google %}
+	    <a href='/google'>Authenticate with Google</a>
+	{% else %}
+	    You have authenticate with google as {{google['email']}}
+	{% end %}
+	{% if not twitter %}
+	    <a href='/twitter'>Authenticate with Twitter</a>
+	{% else %}
+	    You have authenticated with twitter as {{twitter['username']}}
+	{% end %}
+	{% if not facebook %}
+	    <a href='/facebook'>Authenticate with Facebook</a>
+	{% else %}
+	    You have authenticated with facebook as {{facebook['name']}}
+	    <img src="{{facebook['pic_square']}}" alt="pic" />
+	{% end %}
+    </div>
+{% else %}
+    You have authenticated with Google, Twitter and Facebook.
+{% end %}
+</div>
