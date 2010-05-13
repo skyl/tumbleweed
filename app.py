@@ -216,6 +216,9 @@ urls = [
     (r'/check-username', CheckUserName),
 ]
 
+from local_settings import twitter_consumer_key, twitter_consumer_secret, facebook_api_key, facebook_secret,\
+        friendfeed_consumer_key, friendfeed_consumer_secret
+
 settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "static"),
     "cookie_secret": "61oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
@@ -223,12 +226,12 @@ settings = {
     "xsrf_cookies": True,
     "ui_modules": uimodules,
     # these credentials are good for localhost:8000
-    "twitter_consumer_key": 'f2QpwYkwTdylQCLebkXOIA',
-    "twitter_consumer_secret": 'E3DrUDn3GSv1tZetps8Whg6y5p3FPuP70dHQThcJrI',
-    "facebook_api_key": 'dbee7c681fb8b3c375c5fc4fedea46e0',
-    "facebook_secret": 'b3f2adf023c9af70934c003e1c438d7c',
-    "friendfeed_consumer_key": '6e4475caaf5541f3a11a0d434de241e2',
-    "friendfeed_consumer_secret": 'b27d620f896947dab92e8ada4f7be18b68528faaff3d48749b9b663335baad42',
+    "twitter_consumer_key": twitter_consumer_key
+    "twitter_consumer_secret": twitter_consumer_secret,
+    "facebook_api_key": facebook_api_key,
+    "facebook_secret": facebook_secret,
+    "friendfeed_consumer_key": friendfeed_consumer_key,
+    "friendfeed_consumer_secret": friendfeed_consumer_secret,
 }
 application = tornado.web.Application(urls, **settings)
 
